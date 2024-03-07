@@ -228,6 +228,9 @@ const getSuggestionItems = ({ query }: { query: string }) => {
   });
 };
 
+//global _stop so we can call useComplete stop() from outside
+let _stop = null
+
 export const updateScrollView = (container: HTMLElement, item: HTMLElement) => {
   const containerHeight = container.offsetHeight;
   const itemHeight = item ? item.offsetHeight : 0;
@@ -281,6 +284,9 @@ const CommandList = ({
       window?.removeEventListener('mousedown', mousedownHandler)
     },
   });
+
+    //asign the global _stop
+    _stop = stop
 
   const selectItem = useCallback(
     (index: number) => {
