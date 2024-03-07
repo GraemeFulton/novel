@@ -264,6 +264,8 @@ const CommandList = ({
         va.track("Rate Limit Reached");
         return;
       }
+      //listen for when user clicks and AI is running
+      window?.addEventListener('mousedown', mousedownHandler)
       editor.chain().focus().deleteRange(range).run();
     },
     onFinish: (_prompt, completion) => {
@@ -272,9 +274,11 @@ const CommandList = ({
         from: range.from,
         to: range.from + completion.length,
       });
+      window?.removeEventListener('mousedown', mousedownHandler)
     },
     onError: () => {
       toast.error("Something went wrong.");
+      window?.removeEventListener('mousedown', mousedownHandler)
     },
   });
 
@@ -286,6 +290,9 @@ const CommandList = ({
       });
       if (item) {
         if (item.title === "Continue writing") {
+          //stop the cursor position changing
+          window?.addEventListener('mousedown', mousedownHandler)
+
           const text = editor.getText();
           complete(text);
         } else {
@@ -423,3 +430,13 @@ const SlashCommand = Command.configure({
 });
 
 export default SlashCommand;
+
+// stop user clicking somwehere else when AI writing
+const mousedownHandler = (e) =>{
+  e.preventDefault()
+  e.stopPropagation()
+  if(window.confirm('Stop AI Writing')){
+    _stop()
+    window?.removeEventListener('mousedown', mousedownHandler)
+  }
+}

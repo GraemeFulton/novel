@@ -122,8 +122,18 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
             </div>
             <div className="flex w-full justify-between" style={{width:470}}>
               <div className="flex">
-                <button className="text-xs mx-2 border px-1 py-0.5  border-1 border-gray-800 rounded-lg">Replace selection</button>
-                <button className="text-xs mr-2 border px-1 py-0.5 border-1 border-gray-800 rounded-lg">Insert below</button>
+                <button 
+                onClick={()=>{
+                  editor.chain().focus().insertContent(completion).run();
+                  setShow(false)
+                }}
+                className="text-xs mx-2 border px-1 py-0.5  border-1 border-gray-800 rounded-lg">Replace selection</button>
+                <button 
+                onClick={()=>{
+                  editor.chain().selectTextblockEnd().focus().insertContent(completion).run();
+                  setShow(false)
+                }}
+                className="text-xs mr-2 border px-1 py-0.5 border-1 border-gray-800 rounded-lg">Insert after</button>
               </div>
                 <button 
                 onClick={()=>{
