@@ -66,7 +66,7 @@ const AIBubbleMenu: React.FC<Props> = ({ editor }: Props) => {
               if(mainEditorBox){
                 const editorRect = mainEditorBox.getBoundingClientRect()
                 //not sure why, but about -120 puts it in the right place horizontally
-                const modifyPos = -120
+                const modifyPos = 0
                 respositionRect.left = editorRect.left + modifyPos
                 respositionRect.x =editorRect.left + modifyPos
                 return respositionRect
