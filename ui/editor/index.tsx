@@ -11,7 +11,7 @@ import { useCompletion } from "ai/react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
 import DEFAULT_EDITOR_CONTENT from "./default-content";
-// import AIBubbleMenu from "./components/bubble-menu/ai";
+import AIBubbleMenu from "./components/bubble-menu/ai";
 
 export default function Editor() {
   const [content, setContent] = useLocalStorage(
@@ -148,7 +148,7 @@ export default function Editor() {
       {editor && (
         <>
           <EditorBubbleMenu editor={editor} />
-          {/* <AIBubbleMenu editor={editor} /> */}
+          <AIBubbleMenu editor={editor} />
         </>
       )}
     </div>
